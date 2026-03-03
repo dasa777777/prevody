@@ -45,18 +45,20 @@ void doHexadec(double cislo, int presnost);
 
 int main(void)
 {
-    double *pole = malloc(20 * sizeof(double)); // dynamicky alokovane pole pre vstupy upravene na float
+    double *pole = malloc(20 * sizeof(double));
     if (!pole)
     {
         printf("Chyba alokacie pamate!\n");
         return 1;
     }
+
     int kapacita = 20, index = 0;
     char vstup[50];//premenna na ukladanie zadanych vstupov
     double cislo;
 
     printf("Vitaj v programe na vypocet suctu zadavanych cisel a ich prevod do vybranej ciselnej sustavy.\n");
     printf("Pri zapise desatinneho cisla pouzi na oddelenie desatinnej casti bodku. Nezapisuj cisla dlhsie ako 15 cifier, program nebude pracovat spravne.\n");
+    printf("Program zaokruhluje vysledny sucet na osem desatinnych miest.\n");
     printf("Zadaj cislo (q/Q pre ukoncenie): ");
     fgets(vstup, sizeof(vstup), stdin);
     vstup[strcspn(vstup, "\n")] = '\0';
@@ -287,18 +289,18 @@ void doOsmickovej(double cislo, int presnost)
     }
     int cela = (int)cislo;
     double desatina = cislo - cela;
-    char buffer[64];
+    char octal[64];
     int index = 0;
-    if (cela == 0) buffer[index++] = '0';
+    if (cela == 0) octal[index++] = '0';
     else
     {
         while (cela > 0)
         {
-            buffer[index++] = '0' + (cela % 8);
+            octal[index++] = '0' + (cela % 8);
             cela /= 8;
         }
     }
-    for (int i = index - 1; i >= 0; i--) putchar(buffer[i]);
+    for (int i = index - 1; i >= 0; i--) putchar(octal[i]);
     putchar('.');
     for (int i = 0; i < presnost; i++)
     {
@@ -320,20 +322,20 @@ void doHexadec(double cislo, int presnost)
     int cela = (int)cislo;
     double desatina = cislo - cela;
 
-    char buffer[64];
+    char hexal[64];
     int index = 0;
     const char *hex = "0123456789ABCDEF";
 
-    if (cela == 0) buffer[index++] = '0';
+    if (cela == 0) hexal[index++] = '0';
     else {
         while (cela > 0) {
-            buffer[index++] = hex[cela % 16];
+            hexal[index++] = hex[cela % 16];
             cela /= 16;
         }
     }
 
     for (int i = index - 1; i >= 0; i--)
-        putchar(buffer[i]);
+        putchar(hexal[i]);
 
     putchar('.');
 
