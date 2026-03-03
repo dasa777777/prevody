@@ -349,3 +349,4 @@ void doHexadec(double cislo, int presnost)
 
 
 
+
