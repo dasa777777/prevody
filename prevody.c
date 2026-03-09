@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#define KAPACITA 20
 
 
 
@@ -45,14 +46,14 @@ void doHexadec(double cislo, int presnost);
 
 int main(void)
 {
-    double *pole = malloc(20 * sizeof(double));
+    double *pole = malloc(KAPACITA * sizeof(double));
     if (!pole)
     {
         printf("Chyba alokacie pamate!\n");
         return 1;
     }
 
-    int kapacita = 20, index = 0;
+    int kapacita = KAPACITA, index = 0;
     char vstup[50];//premenna na ukladanie zadanych vstupov
     double cislo;
 
@@ -346,6 +347,7 @@ void doHexadec(double cislo, int presnost)
         desatina -= digit;
     }
 }
+
 
 
 
